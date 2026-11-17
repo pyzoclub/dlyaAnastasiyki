@@ -340,7 +340,7 @@ textarea{font-size:16px}
  <h1 style="font-size:27px">Сделано специально для Анастасии,<br>где-то в провинциях Тулы 🐛🌷</h1>
  <div class="wband" data-worm></div>
  <p class="sub">Спасибо, что была здесь. До встречи </p>
-<p class="sub" id="sendnote">ответы улетели💌</p>
+<p class="sub" id="sendnote">ответы улетели</p>
  <div class="center" id="sendpanel" style="margin-top:14px">
  </div>
  <div class="hicons" style="margin-top:16px">
@@ -520,7 +520,7 @@ $$(".chip","#prefs").forEach(function(c){c.addEventListener("click",function(){c
 $("#send").addEventListener("click",function(){window.__prefs=$$(".chip.sel","#prefs").map(function(x){return x.dataset.p});window.__wish=$("#wish").value;$("#sendnote").textContent="отправляю ответы на почту…";sendAnswers();
 runScene("seal",function(){go("p-final");fireConfetti();
 wt(function(){var n=$("#sendnote");
-n.textContent=sendState===1?"ответы уже улетели на denkanat00@gmail.com 💗":(sendState===2?"не получилось отправить, проверь интернет и попробуй ещё раз 💗":"ответы уже в пути на почту 💗")},900)})}); /* --- отправка ответов --- */ function fmtD(d){if(!d)return "не указано";var p=function(x){return (x<10?"0":"")+x};return p(d.getDate())+"."+p(d.getMonth()+1)+"."+d.getFullYear()} function answersText(){var s=c1.get(),s2=c2.get();return "Настроение: "+(window.__mood||"не указано")+"\nКогда удобно: "+fmtD(s.from)+" до "+fmtD(s.to)+"\nПриезд в Тулу: "+fmtD(s2.from)+" до "+fmtD(s2.to)+"\nПредпочтения: "+((window.__prefs&&window.__prefs.length)?window.__prefs.join(", "):"не выбрано")+"\nПожелания: "+(window.__wish||"нет")} function copyText(t){if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(t)}return new Promise(function(res,rej){var ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");res()}catch(e){rej(e)}ta.remove()})} /* --- автоотправка ответов на почту прямо с сайта --- */
+n.textContent=sendState===1?"ответы уже улетели":(sendState===2?"не получилось отправить, проверь интернет и попробуй ещё раз 💗":"ответы уже в пути на почту 💗")},900)})}); /* --- отправка ответов --- */ function fmtD(d){if(!d)return "не указано";var p=function(x){return (x<10?"0":"")+x};return p(d.getDate())+"."+p(d.getMonth()+1)+"."+d.getFullYear()} function answersText(){var s=c1.get(),s2=c2.get();return "Настроение: "+(window.__mood||"не указано")+"\nКогда удобно: "+fmtD(s.from)+" до "+fmtD(s.to)+"\nПриезд в Тулу: "+fmtD(s2.from)+" до "+fmtD(s2.to)+"\nПредпочтения: "+((window.__prefs&&window.__prefs.length)?window.__prefs.join(", "):"не выбрано")+"\nПожелания: "+(window.__wish||"нет")} function copyText(t){if(navigator.clipboard&&navigator.clipboard.writeText){return navigator.clipboard.writeText(t)}return new Promise(function(res,rej){var ta=document.createElement("textarea");ta.value=t;ta.style.position="fixed";ta.style.opacity="0";document.body.appendChild(ta);ta.select();try{document.execCommand("copy");res()}catch(e){rej(e)}ta.remove()})} /* --- автоотправка ответов на почту прямо с сайта --- */
 var sendState=0;
 function sendAnswers(){var b=answersText();
 fetch("https://formsubmit.co/ajax/denkanat00@gmail.com",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({_subject:"Ответы с сайта 💌",_template:"table",Ответы:b})}).then(function(r){return r.ok?r.json():Promise.reject()}).then(function(){sendState=1}).catch(function(){sendState=2})} /* --- вуаль-переход --- */
